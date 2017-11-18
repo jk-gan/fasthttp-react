@@ -1,0 +1,44 @@
+<%! 
+import "fasthttp/model"
+%>
+<%: func Main(merchant *model.Merchant, buffer *bytes.Buffer) %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= merchant.Name %></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta property="og:title" content="<%= merchant.Name %>" />
+    <meta property="og:url" content="<%= merchant.LogoURL %>" />
+    <meta property="og:description" content="<%= merchant.Name %>" />
+    <meta property="og:image" content="<%= merchant.LogoURL %>" />
+</head>
+
+<%
+    data, _ := json.Marshal(merchant)
+%>
+<body>
+    <script type="text/javascript">
+        // inject server code to here
+        window.App = {
+            merchant: <%== string(data) %>,
+        };
+    </script>
+    <script type="text/javascript">
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.com/en_US/messenger.Extensions.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'Messenger'));
+    </script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <div id="app"></div>
+</body>
+
+</html>

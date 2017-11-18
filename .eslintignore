@@ -1,0 +1,2 @@
+# ignore vendor librarry
+/src/vendor/*
