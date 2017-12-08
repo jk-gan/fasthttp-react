@@ -6,8 +6,8 @@ package template
 import (
 	"bytes"
 	"encoding/json"
-	"fasthttp/model"
 
+	"github.com/revenuemonster/rm-api/model"
 	"github.com/shiyanhui/hero"
 )
 
@@ -18,7 +18,7 @@ func Main(merchant *model.Merchant, buffer *bytes.Buffer) {
 
 <head>
     <title>`)
-	hero.EscapeHTML(merchant.Name, buffer)
+	hero.EscapeHTML(merchant.MerchantName, buffer)
 	buffer.WriteString(`</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,16 +26,16 @@ func Main(merchant *model.Merchant, buffer *bytes.Buffer) {
     <meta name="description" content="">
     <meta name="author" content="">
     <meta property="og:title" content="`)
-	hero.EscapeHTML(merchant.Name, buffer)
+	hero.EscapeHTML(merchant.MerchantName, buffer)
 	buffer.WriteString(`" />
     <meta property="og:url" content="`)
-	hero.EscapeHTML(merchant.LogoURL, buffer)
+	hero.EscapeHTML(merchant.MerchantLogo, buffer)
 	buffer.WriteString(`" />
     <meta property="og:description" content="`)
-	hero.EscapeHTML(merchant.Name, buffer)
+	hero.EscapeHTML(merchant.MerchantName, buffer)
 	buffer.WriteString(`" />
     <meta property="og:image" content="`)
-	hero.EscapeHTML(merchant.LogoURL, buffer)
+	hero.EscapeHTML(merchant.MerchantLogo, buffer)
 	buffer.WriteString(`" />
 </head>
 

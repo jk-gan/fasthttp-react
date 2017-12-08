@@ -2,8 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fasthttp/model"
-	"fasthttp/template"
 	"fmt"
 	"log"
 	"os"
@@ -11,6 +9,8 @@ import (
 
 	"github.com/buaazp/fasthttprouter"
 	"github.com/revenuemonster/rm-api/db"
+	"github.com/revenuemonster/rm-api/model"
+	"github.com/revenuemonster/rm-fasthttp/template"
 	"github.com/valyala/fasthttp"
 )
 
@@ -91,8 +91,8 @@ func GetMerchant(ctx *fasthttp.RequestCtx) {
 	// }
 
 	merchant := &model.Merchant{
-		Name:    "RevenueMonster",
-		LogoURL: "",
+		MerchantName: "RevenueMonster",
+		MerchantLogo: "",
 	}
 
 	buffer := new(bytes.Buffer)
@@ -130,5 +130,13 @@ func main() {
 	}
 	router.GET("/", Index)
 	router.GET("/:id", GetMerchant)
+
+	p := "Main"
+	fmt.Println(p)
+	// fnValue := reflect.ValueOf(template.(p))
+	// arguments := []reflect.Value{}
+	// fmt.Println(fnValue)
+	// fmt.Println(arguments)
+
 	log.Fatal(fasthttp.ListenAndServe(":8080", router.Handler))
 }
